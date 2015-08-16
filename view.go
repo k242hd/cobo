@@ -26,6 +26,24 @@ func InitView(m *Model) *View {
 	return v
 }
 
+func (v *View) lineUp(m *Model) {
+	if v.ptr == 0 {
+		return
+	}
+	v.println(v.ptr, m.contents[v.ptr], false)
+	v.ptr--
+	v.println(v.ptr, m.contents[v.ptr], true)
+}
+
+func (v *View) lineDown(m *Model) {
+	if v.ptr == len(m.contents)-1 {
+		return
+	}
+	v.println(v.ptr, m.contents[v.ptr], false)
+	v.ptr++
+	v.println(v.ptr, m.contents[v.ptr], true)
+}
+
 func (v *View) println(y int, msg string, highlight bool) {
 	if highlight {
 		for x, c := range msg {
@@ -37,6 +55,9 @@ func (v *View) println(y int, msg string, highlight bool) {
 	} else {
 		for x, c := range msg {
 			termbox.SetCell(x, y, c, termbox.ColorWhite, termbox.ColorDefault)
+		}
+		for x := len(msg); x < v.width; x++ {
+			termbox.SetCell(x, y, ' ', termbox.ColorDefault, termbox.ColorDefault)
 		}
 	}
 	termbox.Flush()

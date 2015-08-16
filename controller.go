@@ -12,7 +12,7 @@ func main() {
 		log.Fatal(err)
 	}
 	m := InitModel()
-	InitView(m)
+	v := InitView(m)
 
 	event := make(chan termbox.Event)
 	go func() {
@@ -25,11 +25,24 @@ func main() {
 loop:
 	for {
 		select {
+		case ev := <-event:
+			updateEvent(ev, v, m)
 		case <-time.After(5 * time.Second):
 			break loop
 		}
 	}
 	close(event)
 	termbox.Close()
+}
 
+func updateEvent(ev termbox.Event, v *View, m *Model) {
+	switch ev.Type {
+	case termbox.EventKey:
+		switch ev.Ch {
+		case 'k':
+			v.lineUp(m)
+		case 'j':
+			v.lineDown(m)
+		}
+	}
 }
