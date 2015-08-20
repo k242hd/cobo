@@ -26,7 +26,7 @@ func InitView(m *Model) *View {
 	return v
 }
 
-func (v *View) lineUp(m *Model) {
+func (v *View) LineUp(m *Model) {
 	if v.ptr == 0 {
 		return
 	}
@@ -35,7 +35,7 @@ func (v *View) lineUp(m *Model) {
 	v.println(v.ptr, m.contents[v.ptr], true)
 }
 
-func (v *View) lineDown(m *Model) {
+func (v *View) LineDown(m *Model) {
 	if v.ptr == len(m.contents)-1 {
 		return
 	}

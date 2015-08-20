@@ -40,9 +40,9 @@ func updateEvent(ev termbox.Event, v *View, m *Model) {
 	case termbox.EventKey:
 		switch ev.Ch {
 		case 'k':
-			v.lineUp(m)
+			v.LineUp(m)
 		case 'j':
-			v.lineDown(m)
+			v.LineDown(m)
 		}
 	}
 }
