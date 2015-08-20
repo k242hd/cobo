@@ -27,8 +27,6 @@ loop:
 		select {
 		case ev := <-event:
 			updateEvent(ev, v, m)
-		case <-time.After(5 * time.Second):
-			break loop
 		}
 		if v.quit {
 			break loop
