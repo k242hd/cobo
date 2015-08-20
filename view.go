@@ -6,6 +6,7 @@ type View struct {
 	height int
 	width  int
 	ptr    int
+	quit   bool
 }
 
 func InitView(m *Model) *View {
@@ -14,6 +15,7 @@ func InitView(m *Model) *View {
 		height: h,
 		width:  w,
 		ptr:    0,
+		quit:   false,
 	}
 	termbox.Clear(termbox.ColorDefault, termbox.ColorDefault)
 	for y, c := range m.contents {
@@ -24,6 +26,10 @@ func InitView(m *Model) *View {
 		}
 	}
 	return v
+}
+
+func (v *View) Exit() {
+	v.quit = true
 }
 
 func (v *View) LineUp(m *Model) {

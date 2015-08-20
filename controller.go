@@ -30,6 +30,9 @@ loop:
 		case <-time.After(5 * time.Second):
 			break loop
 		}
+		if v.quit {
+			break loop
+		}
 	}
 	close(event)
 	termbox.Close()
@@ -39,6 +42,8 @@ func updateEvent(ev termbox.Event, v *View, m *Model) {
 	switch ev.Type {
 	case termbox.EventKey:
 		switch ev.Ch {
+		case 'q':
+			v.Exit()
 		case 'k':
 			v.LineUp(m)
 		case 'j':
