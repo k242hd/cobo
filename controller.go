@@ -21,14 +21,13 @@ func main() {
 		}
 	}()
 
-loop:
 	for {
 		select {
 		case ev := <-event:
 			updateEvent(ev, v, m)
 		}
 		if v.quit {
-			break loop
+			break
 		}
 	}
 	close(event)
