@@ -74,7 +74,7 @@ func (v *View) printTwoColumn(y int, left, right string, highlight bool) {
 func (v *View) println(y int, msg string, highlight bool) {
 	if highlight {
 		for x, c := range msg {
-			termbox.SetCell(x, y, c, termbox.ColorWhite, termbox.ColorMagenta)
+			termbox.SetCell(x, y, c, termbox.ColorDefault, termbox.ColorMagenta)
 		}
 		for x := len(msg); x < v.width; x++ {
 			termbox.SetCell(x, y, ' ', termbox.ColorDefault, termbox.ColorMagenta)
